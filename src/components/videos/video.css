@@ -1,0 +1,362 @@
+@import url("../index.css");
+
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+}
+
+body {
+    position: relative;
+    background-color: black; /* Couleur de base */
+}
+
+
+body::before {
+    content: '';
+    position: fixed; /* Utilisez fixed au lieu de absolute */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, black, rgb(20, 20, 20));
+    z-index: -1; /* Placez-le derrière le contenu */
+    pointer-events: none; /* Pour qu'il n'interfère pas avec les interactions */
+}
+
+
+.neon-title{
+    margin-top:200px;
+    margin-bottom: 100px;
+}
+
+
+.hollywood-video-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding:20px 0;
+}
+
+.hollywood-video-grid {
+    justify-content: center; /* Assure le centrage des vidéos */
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    width: 90%;
+    max-width: 1000px;
+    margin:auto;
+}
+
+@media (max-width: 768px) {
+    .hollywood-video-grid {
+        grid-template-columns: 1fr; /* Une seule colonne */
+    }
+    .hollywood-video-frame{
+        width:70%;
+    }
+}
+
+.hollywood-video-frame {
+    margin-top: 100px;
+    position: relative;
+    background: rgba(0,0,0,0.8);
+    border: 5px solid transparent;
+    border-image: linear-gradient(
+        to right, 
+        #FF69B4, 
+        #FFD700
+    ) 1;
+    box-shadow: 
+        0 0 20px rgba(255, 105, 180, 0.5),
+        0 0 40px rgba(255, 215, 0, 0.5),
+        inset 0 0 30px rgba(255, 105, 180, 0.3);
+    
+    /* Animation de brillance néon */
+    animation: neon-pulse 3s infinite alternate;
+    overflow: hidden;
+    max-width: 600px;
+    margin: auto; /* Centrer horizontalement */
+}
+
+/* Animation de pulsation néon */
+@keyframes neon-pulse {
+    0% {
+        box-shadow: 
+            0 0 15px rgba(255, 105, 180, 0.4),
+            0 0 30px rgba(255, 215, 0, 0.4),
+            inset 0 0 20px rgba(255, 105, 180, 0.2);
+    }
+    100% {
+        box-shadow: 
+            0 0 25px rgba(255, 105, 180, 0.6),
+            0 0 50px rgba(255, 215, 0, 0.6),
+            inset 0 0 35px rgba(255, 105, 180, 0.4);
+    }
+}
+
+.hollywood-video {
+    width: 80%;
+    height: auto;
+    display: block;
+    max-width: 100%; /* Empêche le dépassement */
+    filter: brightness(0.9);
+    transition: filter 0.3s ease;
+}
+
+.hollywood-video:hover {
+    filter: brightness(1.1);
+}
+
+/* Bobines de film néon */
+.film-reel-left,
+.film-reel-right {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    
+    border-radius: 50%;
+    border: 3px solid #FF69B4;
+    box-shadow: 
+        0 0 15px rgba(255, 105, 180, 0.5),
+        inset 0 0 10px rgba(255, 105, 180, 0.3);
+    
+    /* Animation de scintillement */
+    animation: neon-flicker 2s infinite alternate;
+}
+
+/* Animation de scintillement */
+@keyframes neon-flicker {
+    0%, 18%, 22%, 25%, 53%, 57%, 100% {
+        box-shadow: 
+            0 0 15px rgba(255, 105, 180, 0.5),
+            inset 0 0 10px rgba(255, 105, 180, 0.3);
+    }
+    20%, 24%, 55% {
+        box-shadow: 
+            0 0 25px rgba(255, 105, 180, 0.7),
+            inset 0 0 20px rgba(255, 105, 180, 0.5);
+    }
+}
+
+.film-reel-left {
+    top: 50%;
+    left: -25px;
+    transform: translateY(-50%) rotate(45deg);
+}
+
+.film-reel-right {
+    top: 50%;
+    right: -25px;
+    transform: translateY(-50%) rotate(-45deg);
+}
+
+/* Effet de lumière néon */
+.hollywood-video-frame::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(
+        ellipse at center, 
+        rgba(255, 105, 180, 0.2) 0%, 
+        rgba(255, 215, 0, 0.1) 70%, 
+        transparent 100%
+    );
+    opacity: 0.5;
+    pointer-events: none;
+    animation: neon-glow 4s infinite alternate;
+}
+
+@keyframes neon-glow {
+    0% {
+        opacity: 0.4;
+    }
+    100% {
+        opacity: 0.6;
+    }
+}
+
+/* Personnalisation des contrôles vidéo */
+.hollywood-video::-webkit-media-controls-panel {
+    background-color: rgba(0,0,0,0.9);
+    box-shadow: 0 0 15px rgba(255, 105, 180, 0.3);
+}
+
+
+#connecte {
+    margin-top: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center; /* Ajout pour centrer le texte */
+    border-radius: 50px;
+    border: 2px solid var(--primary-pink);
+    box-shadow: 0 0 20px rgba(255, 105, 180, 0.3);
+    height: 100px;
+    padding: 0 20px; /* Ajoute un peu de padding horizontal */
+}
+
+@media (max-width:768px){
+    #connecte {
+        height: 150px;
+        padding: 0 15px; /* Ajuste le padding pour mobile */
+    }
+}
+
+/* Centrage du texte */
+#connecte h2 {
+    margin: 0;
+    line-height: 1.2;
+    max-width: 100%; /* Assure que le texte ne dépasse pas */
+    word-wrap: break-word; /* Permet de couper les mots longs */
+}
+
+.button-container {
+    display: flex;
+    justify-content: center; /* Centre horizontalement */
+    width: 100%;
+}
+
+
+#casLoginButton {
+    background: linear-gradient(45deg, #FF69B4, #FFD700);
+    border: none;
+    color: white;
+    padding: 15px 30px;
+    font-size: 18px;
+    border-radius: 50px;
+    box-shadow: 0 0 20px rgba(255, 105, 180, 0.7);
+    transition: all 0.3s ease;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-align: center;
+}
+
+#casLoginButton:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 30px rgba(255, 215, 0, 0.8);
+}
+
+#casLoginButton:active {
+    transform: scale(0.95);
+}
+
+
+
+
+.hollywood-video-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center; /* Ajouté pour centrer verticalement */
+}
+
+.video-subtitle {
+    font-family: 'Great Vibes', cursive;
+    font-size: 2.5rem;
+    color: #FF69B4;
+    margin-top: 20px;
+    text-align: center;
+}
+
+.video-subtitle:hover {
+    color:var(--accent-gold);
+    text-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
+    transform: scale(1.05);
+    transition: var(--transition-smooth);
+
+}
+
+
+.burger-menu {
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 40px;
+    height: 30px;
+    cursor: pointer;
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    z-index: 1100;
+}
+
+.burger-menu div {
+    width: 100%;
+    height: 4px;
+    background: var(--primary-pink);
+    transition: var(--transition-smooth);
+}
+
+/* Navigation cachée sur mobile */
+@media (max-width: 768px) {
+    .burger-menu {
+        display: flex;
+    }
+
+    .main-nav {
+        display: none;
+        flex-direction: column;
+        background: rgba(0, 0, 0, 0.95);
+        position: absolute;
+        top: 100%;
+        right: 0;
+        width: 100%;
+        text-align: center;
+        padding: 1rem 0;
+        box-shadow: 0 2px 10px rgba(255, 105, 180, 0.2);
+    }
+
+    .main-nav.active {
+        display: flex;
+    }
+
+    .nav-link {
+        display: block;
+        padding: 1rem 0;
+        font-size: 1.2rem;
+    }
+
+    /* Animation burger ouvert */
+    .burger-menu.open div:nth-child(1) {
+        transform: rotate(45deg) translate(6px, 6px);
+    }
+
+    .burger-menu.open div:nth-child(2) {
+        opacity: 0;
+    }
+
+    .burger-menu.open div:nth-child(3) {
+        transform: rotate(-45deg) translate(6px, -6px);
+    }
+}
+
+/* Assurer que le site ne dépasse pas l'écran */
+html, body {
+    overflow-x: hidden;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+/* Adapter la taille du titre pour mobile */
+@media (max-width: 768px) {
+    .neon-title {
+        font-size: 2rem;
+        text-align: center;
+        padding: 0 5px;
+    }
+}
+@media (max-width: 768px) {
+    .header-title a {
+        pointer-events: none; /* Désactive le lien */
+        text-decoration: none; /* Enlève le soulignement */
+        color: inherit; /* Garde la couleur du texte */
+    }
+}

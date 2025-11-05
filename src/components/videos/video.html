@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hollywood'eirb - Videos</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Italiana&family=Cormorant+Garamond:wght@400;600&family=Petit+Formal+Script&family=Marcellus&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Rozha+One&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Great+Vibes&family=Cinzel:wght@400;700&family=Montserrat:wght@300;400;600&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./video.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+  </head>
+  <body>
+    <!-- Navigation -->
+    <header class="header" id="header">
+      <div class="header-content">
+        <div class="logo">
+          <a href="../index.html">
+            <img
+              src="../../assets/images/logo/logo.png"
+              alt="Hollywood'eirb Logo"
+              class="navbar-logo"
+            />
+          </a>
+          <h1 class="header-title">
+            <a href="../index.html">Hollywood'eirb&nbsp;</a>
+          </h1>
+        </div>
+        <div class="burger-menu">
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+        <nav class="main-nav">
+          <a href="../index.html" class="nav-link">ACCUEIL</a>
+          <a href="../acteurs/acteurs.html" class="nav-link">ACTEURS</a>
+          <a href="../allo/allo.html" class="nav-link">ALLO</a>
+          <a href="../partenaire/partenaire.html" class="nav-link">PARTENAIRES</a>
+          <a href="../jeu/jeu.html" target="_blank" class="nav-link">JEU</a>
+          <a href="https://pokewood.fr/" target="_blank" class="nav-link">PKW</a>
+          <a href="../videos/video.html" class="nav-link">VIDÉOS</a>
+        </nav>
+      </div>
+    </header>
+
+    <div class="starry-sky"></div>
+    <h1 class="neon-title">Hollywood'eirb - Vidéos</h1>
+
+
+    <div class="button-container">
+      <button id="casLoginButton">SE CONNECTER</button>
+    </div> 
+    <div id="supp">
+      <div id="connecte">
+        <h2>Veuillez vous connectez afin de visualiser ces délicieuses vidéos.</h2>
+      </div>
+    </div>
+    <div class="hollywood-video-container">
+      <div class="hollywood-video-grid">
+        <div class="hollywood-video-card">
+          <div class="hollywood-video-frame" id="PresVideo">
+            <div class="film-reel-left"></div>
+            <div class="film-reel-right"></div>
+            
+          </div>
+          <h3 class="video-subtitle">Vidéo Présentation</h3>
+        </div>
+
+        <div class="hollywood-video-card">
+          <div class="hollywood-video-frame" id="RapVideo">
+            <div class="film-reel-left"></div>
+            <div class="film-reel-right"></div>
+
+          </div>
+          <h3 class="video-subtitle">Rap</h3>
+        </div>
+
+        <div class="hollywood-video-card">
+          <div class="hollywood-video-frame" id="ParfumVideo">
+            <div class="film-reel-left"></div>
+            <div class="film-reel-right"></div>
+
+          </div>
+          <h3 class="video-subtitle">Parfum</h3>
+        </div>
+
+        <div class="hollywood-video-card">
+          <div class="hollywood-video-frame" id="CielVideo">
+            <div class="film-reel-left"></div>
+            <div class="film-reel-right"></div>
+            
+          </div>
+          <h3 class="video-subtitle">Ciel</h3>
+        </div>
+
+
+      </div>
+    </div>
+
+    <div id="scroll-button" class="scroll-button">
+      <i class="fas fa-arrow-up"></i>
+    </div>
+
+
+    <footer id="footer">
+      <div class="footer-content">
+        <a href="https://www.instagram.com/hollywoodeirb" target="_blank" class="footer-link">Instagram</a>
+          <a href="https://t.me/+ppmDHcVeKDU0OWZk" target="_blank" class="footer-link">Telegram</a>
+          <a href="https://www.youtube.com/watch?v=KG6ft_YDp5k" target="_blank" class="footer-link">CIEL</a>
+      </div>
+  </footer>
+
+    <script src="./video.js"></script>
+    <script>
+      const BACKEND_URL = 'https://hollywood.eirb.fr/php/index.php';  
+      //const BACKEND_URL = 'https://05lbsmftnesigspk9agi1hkkhgpy1wqgcdl1hbkesvo2mgd9bi.eirb.fr/php/index.php';
+ 
+      function CASLogin() {
+        const redirectUrl = window.location.href;
+        const authenticationCasUrl = `https://cas.bordeaux-inp.fr/login?service=${encodeURIComponent(redirectUrl)}`;
+        window.location.href = authenticationCasUrl;
+      }
+    
+      document.getElementById('casLoginButton').addEventListener('click', CASLogin);
+    
+      async function fetchData(ticket, redirectUrl) {
+        try {
+          const response = await fetch(
+            `${BACKEND_URL}?ticket=${ticket}&redirect_url=${btoa(redirectUrl)}`
+          );
+    
+          console.log('Response headers:', response.headers);
+          console.log('Response status:', response.status);
+          console.log('Response .ok', response.ok);
+    
+          if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+          }
+    
+          const result = await response.json();
+          console.log('Result:', result);
+    
+          const ajouterParfum = document.querySelector('#ParfumVideo');
+          const ajouterCiel = document.querySelector('#CielVideo');
+          const ajouterPres = document.querySelector('#PresVideo');
+          const ajouterRap = document.querySelector('#RapVideo');
+          const supp = document.querySelector("#supp");
+
+          if (result.videos) {
+            if (result.videos['ciel']) {
+              ajouterCiel.innerHTML = `<iframe width="560" height="315" src="${result.videos['ciel']}" frameborder="0" allowfullscreen></iframe>`;
+            }
+            if (result.videos['parfum']) {
+              ajouterParfum.innerHTML = `<iframe width="560" height="315" src="${result.videos['parfum']}" frameborder="0" allowfullscreen></iframe>`;
+            }
+            if (result.videos['presentation']) {
+              ajouterPres.innerHTML = `<iframe width="560" height="315" src="${result.videos['presentation']}" frameborder="0" allowfullscreen></iframe>`;
+            }
+            if (result.videos['rap']) {
+              ajouterRap.innerHTML = `<iframe width="560" height="315" src="${result.videos['rap']}" frameborder="0" allowfullscreen></iframe>`;
+            }
+            supp.innerHTML = "";
+          }
+        } catch (error) {
+          console.error('Error:', error);
+        }
+      }
+    
+      document.addEventListener('DOMContentLoaded', () => {
+        const urlParams = new URLSearchParams(window.location.search);
+        const ticket = urlParams.get('ticket');
+    
+        console.log('DOMContentLoaded');
+        console.log('Ticket:', ticket);
+    
+        if (ticket) {
+          window.history.replaceState({}, document.title, window.location.pathname);
+          const redirectUrl = window.location.href;
+          fetchData(ticket, redirectUrl);
+        }
+      });
+    </script>
+    
+  </body>
+</html>
