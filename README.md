@@ -25,19 +25,48 @@ Ce site web présente la liste BDS Hollywood'eirb et ses différentes sections :
 ## 🏗️ Structure du projet
 ```
 hollywood_eirb_website/
-├── index.html          # Page d'accueil
-├── index.css          
-├── index.js
-├── acteurs/           # Section équipe
-├── allo/             # Section commandes
-├── partenaire/       # Section partenaires  
-├── videos/           # Section vidéos
-├── jeu/              # Jeu Pac-Man
-├── images/           # Assets
-│   ├── logo/
-│   ├── produit/
-│   └── partenaires/
-├── php/              # Backend PHP
+├── src/
+│   ├── assets/                # Ressources statiques
+│   │   └── images/
+│   │       ├── logo/         # Logos du site
+│   │       ├── produit/      # Images des produits
+│   │       └── partenaires/  # Logos partenaires
+│   │
+│   ├── components/           # Composants du site
+│   │   ├── index.html       # Page d'accueil
+│   │   ├── index.css        # Style global
+│   │   ├── index.js         # Script global
+│   │   │
+│   │   ├── acteurs/         # Section équipe
+│   │   │   ├── acteurs.html
+│   │   │   ├── acteurs.css
+│   │   │   └── acteurs.js
+│   │   │
+│   │   ├── allo/           # Section commandes
+│   │   │   ├── allo.html
+│   │   │   ├── allo.css
+│   │   │   └── allo.js
+│   │   │
+│   │   ├── partenaire/     # Section partenaires
+│   │   │   ├── partenaire.html
+│   │   │   ├── partenaire.css
+│   │   │   └── partenaire.js
+│   │   │
+│   │   ├── videos/         # Section vidéos
+│   │   │   ├── video.html
+│   │   │   ├── video.css
+│   │   │   └── video.js
+│   │   │
+│   │   └── jeu/            # Jeu Pac-Man
+│   │       ├── app/        # Code source du jeu
+│   │       ├── build/      # Fichiers compilés
+│   │       └── tests/      # Tests unitaires
+│   │
+│   └── php/                # Backend PHP
+│       ├── config.php      # Configuration
+│       ├── functions.php   # Fonctions utilitaires
+│       └── index.php       # Point d'entrée API
+│
 └── README.md
 ```
 
